@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Base Template</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/first_app/css/basic_style.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-brand" href="{% url 'first_app:index' %}">Brand</a></li>
+            <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            <li><a class="navbar-link" href="{% url 'first_app:register' %}">Form</a></li>
+
+            {% if user.is_authenticated %}
+            <li><a class="navbar-link" href="{% url 'first_app:logout' %}">LogOut</a></li>
+            {% else %}
+            <li><a class="navbar-link" href="{% url 'first_app:login' %}">LogIn</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+{% block body_block %}
+    <!-- Anything outside of this will be inherited if you extend -->
+{% endblock %}
+</div>
+</body>
+</html>

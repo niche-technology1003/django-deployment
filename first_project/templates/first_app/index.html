@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "first_app/base.html" %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="{% static '/first_app/css/basic_style.css' %}">
+</head>
+<body>
+{% block body_block %}
+<h1>Hola</h1>
+<!-- Template filtering (in-built) without arguments -->
+{{ insert_text | upper }}
+<!-- Template filtering (in-built) with arguments -->
+{{ insert_text | add:"Hello" }}
+</br>
+<img src="{% static '/first_app/images/python.png' %}" alt="Where is image?">
+</br>
+<a href="{% url 'first_app:form_page' %}"> The Other Page</a>
+<a href="{% url 'admin:index' %}"> Admin View</a>
+<a href="{% url 'first_app:index' %}"> Index View</a>
+</br>
+</br>
+{% if access_record %}
+
+<table>
+    <thead>
+    <th>Site Name</th>
+    <th>Accessed Date</th>
+    </thead>
+
+    {% for acc in access_record %}
+    <tr>
+        <td>{{ acc.name }}</td>
+        <td>{{ acc.date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No records found!</p>
+{% endif %}
+{% endblock %}
+</body>
+</html>
